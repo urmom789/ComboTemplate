@@ -12,6 +12,87 @@ using namespace std;
 
 // Paste your function implementations here
 
+string getImageSource(string tag)
+{
+  size_t start = tag.find("source=\"");
+  start += 8;
+
+  size_t end = tag.find("\"", start);
+  return tag.substr(start, end - start);
+}
+
+string underscoresToSpaces(string str)
+{
+  for (int i = 0; i < str.length(); i++) {
+    if (str[i] == '_') {
+      str[i] = ' ';
+    }
+  }
+  return str;
+}
+
+int getImageWidth(string tag)
+{
+  size_t start = tag.find("width=\"");
+  start += 7;
+
+  size_t end = tag.find("px", start);
+  string num = tag.substr(start, end - start);
+  return stoi(num);
+}
+
+int getImageHeight(string tag)
+{
+  size_t start = tag.find("height=\"");
+  start += 8;
+
+  size_t end = tag.find("px", start);
+  string num = tag.substr(start, end - start);
+  return stoi(num);
+}
+
+int getVerticalPadding(string tag)
+{
+  size_t start = tag.find("padding=\"");
+  if (start == string::npos) {
+    return 0;
+  }
+  start += 9;
+
+  size_t end = tag.find("\"", start);
+  string padding = tag.substr(start, end - start);
+
+  size_t spacePos = padding.find(" ");
+  if (spacePos == string::npos) {
+    size_t pxPos = padding.find("px");
+    return stoi(padding.substr(0, pxPos));
+  } else {
+    size_t pxPos = padding.find("px");
+    return stoi(padding.substr(0, pxPos));
+  }
+}
+
+int getHorizontalPadding(string tag)
+{
+  size_t start = tag.find("padding=\"");
+  if (start == string::npos) {
+    return 0;
+  }
+  start += 9;
+
+  size_t end = tag.find("\"", start);
+  string padding = tag.substr(start, end - start);
+
+  size_t spacePos = padding.find(" ");
+  if (spacePos == string::npos) {
+    size_t pxPos = padding.find("px");
+    return stoi(padding.substr(0, pxPos));
+  } else {
+    size_t pxPos = padding.find("px", spacePos);
+    return stoi(padding.substr(spacePos + 1, pxPos - (spacePos + 1)));
+  }
+}
+
 int main()
 {
   cout << "Enter a tag: ";
