@@ -23,8 +23,14 @@ using namespace std;
 // Functions to write.
 // You do NOT need to write doxygen comments for these. You may add extra helper
 // functions if you want. Work on them one at a time.
+string getImageSource(string tag)
+{
+  size_t start = tag.find("source=\"");
+  start += 8;
 
-// string getImageSource(string tag)
+  size_t end = tag.find("\"", start);
+  return tag.substr(start, end - start);
+}
 
 // string underscoresToSpaces(string str)
 
