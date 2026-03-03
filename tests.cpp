@@ -39,9 +39,18 @@ string underscoresToSpaces(string str)
       str[i] = ' ';
     }
   }
+  return str;
 }
 
-// int getImageWidth(string tag)
+int getImageWidth(string tag)
+{
+  size_t start = tag.find("width=\"");
+  start += 7;
+
+  size_t end = tag.find("px", start);
+  string num = tag.substr(start, end - start);
+  return stoi(num);
+}
 
 // int getImageHeight(string tag)
 
