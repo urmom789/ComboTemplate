@@ -70,7 +70,7 @@ int getVerticalPadding(string tag)
   }
   start += 9;
 
-  size_t end = tag.find("px", start);
+  size_t end = tag.find("\"", start);
   size_t padding = tag.find("\"", start);
   string padding = tag.substr(start, end - start);
 
